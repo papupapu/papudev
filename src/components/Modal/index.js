@@ -10,7 +10,7 @@ const ModalContent = forwardRef(({ isUp, close, modal }, ref) => {
     <>
       <div ref={ref} className={`fixed bg-white z-2 overscroll-contain w-screen h-screen ${isUp ? 'animate-modal' : 'animate-modal-down opacity-0'}`} style={modal.style}>
         <div className="w-full h-full flex flex-col">
-          <Content close={close} />
+          <Content data={{ close }} />
         </div>
       </div>
       <div className={`fixed pointer top-0 left-0 w-screen h-screen bg-black ${isUp ? 'animate-overlayer opacity-50' : 'animate-overlayer-down opacity-0'} z-1`} />        
