@@ -8,7 +8,7 @@ const ModalContent = forwardRef(({ isUp, close, modal }, ref) => {
   const Content = modal.content;
   return (
     <>
-      <div ref={ref} className={`fixed bg-white z-2 overscroll-contain w-screen h-screen ${isUp ? 'animate-modal' : 'animate-modal-down opacity-0'}`} style={modal.style}>
+      <div ref={ref} className={`fixed bg-white z-2 overscroll-contain w-screen h-screen md:rounded-lg ${isUp ? 'animate-modal' : 'animate-modal-down opacity-0'}`} style={modal.style}>
         <div className="w-full h-full flex flex-col">
           <Content data={{ close }} />
         </div>
