@@ -9,7 +9,7 @@ export default function ModalHeader({ data }) {
       </p>
       <button
         type="button"
-        className="absolute top-2 right-2 cursor-pointer"
+        className="absolute top-2 right-3 cursor-pointer"
         onClick={handleClose}
       >
         <Close />

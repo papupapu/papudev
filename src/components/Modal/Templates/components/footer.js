@@ -1,21 +1,22 @@
+import Button from '@/components/Button';
+
 export default function ModalFooter({ data }) {
   return (
-    <div className={`grow-0 shrink-1 basis-auto flex ${Object.keys(data).length > 1 ? 'justify-between' : 'justify-end'} border-t`}>
+    <div className={`grow-0 shrink-1 basis-auto flex ${Object.keys(data).length > 1 ? 'justify-between' : 'justify-end'} py-2 px-4 border-t`}>
       {data.cancel && (
-        <button
-          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-md"
+        <Button
+          negative
           onClick={data.cancel.onClick}
         >
           {data.cancel.text}
-        </button>
+        </Button>
       )}
       {data.confirm && (
-        <button
-          className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-md"
-          onClick={data.confirm.onClick}
+        <Button
+          action={data.confirm.onClick}
         >
           {data.confirm.text}
-        </button>
+        </Button>
       )}
     </div>
   );
