@@ -1,4 +1,7 @@
-import ModalButton from "./ModalButton";
+import FullModalButton from "./ModalButton";
+import SimpleModalButton from "./ModalButton/simple";
+import HeaderModalButton from "./ModalButton/header";
+import FooterModalButton from "./ModalButton/footer";
 
 export default function Home() {
   console.log('Home');
@@ -25,35 +28,11 @@ export default function Home() {
       </p>
       <p className="text-3xl font-bold">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <ModalButton />
+      </p>    
+      <FullModalButton />
+      <SimpleModalButton />
+      <HeaderModalButton />
+      <FooterModalButton />
     </>
   );
 }

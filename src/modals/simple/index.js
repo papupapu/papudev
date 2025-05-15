@@ -1,10 +1,16 @@
-import { useState } from 'react';
-
-import Full from '@/components/Modal/Templates/full';
+import Close from "@/components/Icons/close";
+import Simple from '@/components/Modal/Templates/simple';
 
 function Body({ data }) {
   return (
     <div className="p-4">
+      <button
+        type="button"
+        className="absolute top-2 right-3 cursor-pointer"
+        onClick={data.close}
+      >
+        <Close />
+      </button>
       <p>{data.text}</p>
       <p>{data.text1}</p>
       <p>{data.text2}</p>
@@ -63,40 +69,12 @@ function Body({ data }) {
   );
 }
 
-export default function Test({ data, text, text1, text2 }) {
-  const [confirmed, setConfirmed] = useState(false);
-  const handleConfirm = () => {
-    setConfirmed(true);
-  };
-
-  const footerConfiguration = {
-    confirm: {
-      text: confirmed ? 'Okok' : 'Confirm',
-      onClick: handleConfirm,
-    },
-  };
-
-  if (!confirmed) {
-    footerConfiguration.cancel = {
-      text: 'Cancel',
-      onClick: () => {
-        data.close();
-      },
-    };
-  }
-
+export default function SimpleModal({ data, text, text1, text2 }) {
   return (
-    <Full 
-      header={{
-        title: 'Modal Title',
-        close: data.close,
-      }}
-      
+    <Simple 
       body={
-        <Body data={{ text, text1, text2 }} />
+        <Body data={{ text, text1, text2, close: data.close }} />
       }
-
-      footer={footerConfiguration}
     />
   );
 }

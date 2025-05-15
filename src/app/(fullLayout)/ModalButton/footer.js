@@ -5,19 +5,19 @@ import { useCtxDevice } from '@/state/Device';
 
 import Button from '@/components/Button';
 
-import { createFullModal } from '@/modals/factory';
+import { createFooterModal } from '@/modals/factory';
 
 export default function ModalButton() {
   const { openModal } = useCtxModal();  
   const { device } = useCtxDevice();
 
-  const handleClick = () => openModal(createFullModal({ device }));
+  const handleClick = () => openModal(createFooterModal({ device }));
 
   return (
     <Button
       action={handleClick}
     >
-      Full Modal
+      Footer Modal
     </Button>
   );
 }
