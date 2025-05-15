@@ -1,7 +1,7 @@
-export default function ModalBody() {
+export default function ModalBody({ data }) {
   return (
     <div className="grow overflow-y-auto">
-      <p>body</p>
+      {data}
     </div>
   );
 }

@@ -1,7 +1,7 @@
-import ModalBody from "./components/body";
+import Body from "./components/body";
 
-export default function Simple() {
+export default function Simple({ body }) {
   return (
-    <ModalBody />
+    <Body data={body} />
   );
 }
