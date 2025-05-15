@@ -10,7 +10,7 @@ function createWrapperElement(wrapperId) {
   return wrapperElement;
 }
 
-function ReactPortal({ children, wrapperId, className }) {
+export default function ReactPortal({ children, wrapperId, className }) {
   const [wrapperElement, setWrapperElement] = useState(null);
 
   useLayoutEffect(() => {
@@ -31,7 +31,7 @@ function ReactPortal({ children, wrapperId, className }) {
         element.parentNode.removeChild(element);
       }
     };
-  }, [wrapperId]);
+  }, [wrapperId, className]);
 
   if (!wrapperElement) {
     return null;
@@ -39,5 +39,3 @@ function ReactPortal({ children, wrapperId, className }) {
 
   return createPortal(children, wrapperElement);
 }
-
-export default ReactPortal;

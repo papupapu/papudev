@@ -18,6 +18,8 @@ const ModalContent = forwardRef(({ isUp, close, modal }, ref) => {
   );
 });
 
+ModalContent.displayName = 'ModalContent';
+
 export default function Modal({ content, style, closeModal }) {
   const modalContentRef = useRef(null);
   const [isUp, setIsUp] = useState(true);
