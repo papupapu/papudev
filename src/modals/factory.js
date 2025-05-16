@@ -75,3 +75,17 @@ export const createFooterModal = ({ device }) => (
     } : null,
   }
 );
+
+const Login = dynamic(() => import('../modals/Login'), { ssr: false });
+
+export const createLoginModal = ({ device }) => (
+  {
+    content: ({ data }) => (
+      <Login data={data} />
+    ),
+    style: device !== 'smartphone' ? {
+      maxWidth: 520,
+      maxHeight: 560,
+    } : null,
+  }
+);

@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --lightest: #86C232;
+  --light: #61892F;
+  --darkest: #222629;
+  --darker: #474B4F;
+  --dark: #6B6E70;
+  --lessdark: #afb1b3;
 }
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-opensans: var(--font-opensans);
+  --color-lightest: var(--lightest);
+  --color-light: var(--light);
+  --color-darkest: var(--darkest);
+  --color-darker: var(--darker);
+  --color-dark: var(--dark);
+  --color-lessdark: var(--lessdark);
 
   --animate-modal: modal .3s ease-in-out;
   @keyframes modal {
@@ -40,14 +47,14 @@
       opacity: 0;
     }
     100% {
-      opacity: .5;
+      opacity: .7;
     }
   }
 
   --animate-overlayer-down: overlayerDown .3s ease-in-out;
   @keyframes overlayerDown {
     0% {
-      opacity: .5;
+      opacity: .7;
     }
     100% {
       opacity: 0;
@@ -55,15 +62,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--darkest);
+  color: var(--dark);
   font-family: var(--font-opensans), Arial, Helvetica, sans-serif;
 }

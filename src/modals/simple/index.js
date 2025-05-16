@@ -1,16 +1,16 @@
+import Button from "@/components/Button";
 import Close from "@/components/Icons/close";
 import Simple from '@/components/Modal/Templates/simple';
 
 function Body({ data }) {
   return (
     <div className="p-4">
-      <button
-        type="button"
-        className="absolute top-2 right-3 cursor-pointer"
+      <Button
+        className="absolute top-2 right-3 w-10 h-10"
         onClick={data.close}
       >
         <Close />
-      </button>
+      </Button>
       <p>{data.text}</p>
       <p>{data.text1}</p>
       <p>{data.text2}</p>

@@ -16,6 +16,7 @@ export default function ModalButton() {
   return (
     <Button
       action={handleClick}
+      className="leading-10 px-4"
     >
       Full Modal
     </Button>
