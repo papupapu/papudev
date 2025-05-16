@@ -1,11 +1,14 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 export default function FullLayout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="h-16">header</header>
-      <div className="grow">
+      <Header />
+      <div className="grow pt-16">
         {children}
       </div>
-      <footer className="h-80">footer</footer>
+      <Footer />
     </div>
   );
 }
