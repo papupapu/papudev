@@ -17,6 +17,7 @@ export default function LoginButton() {
   return (
     <Button
       type="button"
+      ariaLabel="Login"
       action={handleClick}
       className="w-10 h-10"
     >

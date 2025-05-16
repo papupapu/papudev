@@ -1,6 +1,7 @@
-import Hamburger from "@/components/Icons/hamburger";
+
 import Wrapper from "@/components/Wrapper";
 import LoginButton from "./LoginButton";
+import MenuButton from "./MenuButton";
 import Background from "./Background";
 
 export default function Header() {
@@ -12,9 +13,7 @@ export default function Header() {
       </h1>
       <div className="flex gap-3">
         <LoginButton />
-        <button type="button" className="flex justify-center items-center w-10 h-10 bg-lightest hover:bg-light cursor-pointer rounded-full text-darkest hover:text-darker transition-colors">
-          <Hamburger />
-        </button>
+        <MenuButton />
       </div>
       </Wrapper>
       <Background />

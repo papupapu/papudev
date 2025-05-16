@@ -1,38 +1,23 @@
-import FullModalButton from "./ModalButton";
-import SimpleModalButton from "./ModalButton/simple";
-import HeaderModalButton from "./ModalButton/header";
-import FooterModalButton from "./ModalButton/footer";
+import { fetchAll } from "@/api";
+
+async function Movies() {
+  const data = await fetchAll();  
+  if (!data || !data.length) {
+    return (
+      <div className="flex flex-col items-center justify-center h-full text-dark">
+        <h1 className="text-2xl font-bold">No data available</h1>
+        <p className="mt-4">Please try again later.</p>
+      </div>
+    );
+  }
+  return data.map((movie, index) => (
+    <div key={movie.episode_id} className={`${index === data.length - 1 ? 'pt-4' : ' py-4 border-b border-light '}`}>
+      <h2 className="text-xl font-bold">{movie.title}</h2>
+      <p className="mt-2 text-lessdark">{movie.opening_crawl}</p>
+    </div>
+  ));
+}
 
 export default function Home() {
-  console.log('Home');
-  return (
-    <>
-      questa è una frase in font Lora
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <p className="text-3xl font-bold">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>    
-      <FullModalButton />
-      <SimpleModalButton />
-      <HeaderModalButton />
-      <FooterModalButton />
-    </>
-  );
+  return <Movies />;
 }
