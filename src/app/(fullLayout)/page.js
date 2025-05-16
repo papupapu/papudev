@@ -12,7 +12,7 @@ async function Movies() {
   }
   return data.map((movie, index) => (
     <div key={movie.episode_id} className={`${index === data.length - 1 ? 'pt-4' : ' py-4 border-b border-light '}`}>
-      <h2 className="text-xl font-bold">{movie.title}</h2>
+      <h2 className="text-xl font-bold text-light">{movie.title}</h2>
       <p className="mt-2 text-lessdark">{movie.opening_crawl}</p>
     </div>
   ));
