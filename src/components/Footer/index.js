@@ -1,5 +1,11 @@
+import Wrapper from "@/components/Wrapper";
+
 export default function Footer() {
   return (
-    <footer className="h-80">footer</footer>
+    <footer>
+      <Wrapper classname="h-80">
+        footer
+      </Wrapper>
+    </footer>
   );
 }
