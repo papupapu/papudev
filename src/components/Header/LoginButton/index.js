@@ -6,13 +6,13 @@ import { useCtxDevice } from '@/state/Device';
 import Button from "@/components/Button";
 import User from "@/components/Icons/user";
 
-import { createSimpleModal } from '@/modals/factory';
+import { createLoginModal } from '@/modals/factory';
 
 export default function LoginButton() {
   const { openModal } = useCtxModal();  
   const { device } = useCtxDevice();
 
-  const handleClick = () => openModal(createSimpleModal({ device }));
+  const handleClick = () => openModal(createLoginModal({ device }));
 
   return (
     <Button

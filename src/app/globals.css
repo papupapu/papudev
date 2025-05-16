@@ -6,6 +6,7 @@
   --darkest: #222629;
   --darker: #474B4F;
   --dark: #6B6E70;
+  --lessdark: #afb1b3;
 }
 
 @theme {
@@ -14,6 +15,7 @@
   --color-darkest: var(--darkest);
   --color-darker: var(--darker);
   --color-dark: var(--dark);
+  --color-lessdark: var(--lessdark);
 
   --animate-modal: modal .3s ease-in-out;
   @keyframes modal {
@@ -45,14 +47,14 @@
       opacity: 0;
     }
     100% {
-      opacity: .5;
+      opacity: .7;
     }
   }
 
   --animate-overlayer-down: overlayerDown .3s ease-in-out;
   @keyframes overlayerDown {
     0% {
-      opacity: .5;
+      opacity: .7;
     }
     100% {
       opacity: 0;

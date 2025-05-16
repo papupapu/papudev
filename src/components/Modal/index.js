@@ -8,12 +8,15 @@ const ModalContent = forwardRef(({ isUp, close, modal }, ref) => {
   const Content = modal.content;
   return (
     <>
-      <div ref={ref} className={`fixed bg-white z-2 overscroll-contain w-screen h-screen md:rounded-lg ${isUp ? 'animate-modal' : 'animate-modal-down opacity-0'}`} style={modal.style}>
+      <div ref={ref} className={`fixed bg-darkest z-2 overscroll-contain w-screen h-screen md:rounded-lg ${isUp ? 'animate-modal' : 'animate-modal-down opacity-0'}`} style={modal.style}>
         <div className="w-full h-full flex flex-col">
           <Content data={{ close }} />
         </div>
       </div>
-      <div className={`fixed pointer top-0 left-0 w-screen h-screen bg-black ${isUp ? 'animate-overlayer opacity-50' : 'animate-overlayer-down opacity-0'} z-1`} />        
+      <div
+        onClick={close}
+        className={`fixed pointer top-0 left-0 w-screen h-screen bg-dark ${isUp ? 'animate-overlayer opacity-70' : 'animate-overlayer-down opacity-0'} z-1`}
+      />
     </>
   );
 });
