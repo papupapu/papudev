@@ -1,4 +1,5 @@
 import { fetchAll } from "@/api";
+import ArticleContent from "@/components/ArticleContent";
 
 async function Movies() {
   const data = await fetchAll();  
@@ -10,12 +11,14 @@ async function Movies() {
       </div>
     );
   }
-  return data.map((movie, index) => (
-    <div key={movie.episode_id} className={`${index === data.length - 1 ? 'pt-4' : ' py-4 border-b border-light '}`}>
-      <h2 className="text-xl font-bold text-light">{movie.title}</h2>
-      <p className="mt-2 text-lessdark">{movie.opening_crawl}</p>
-    </div>
-  ));
+  return data.map((article, index) => {    
+    return (
+      <div key={article.slug} className={`${index === data.length - 1 ? 'pt-4' : ' py-4 border-b border-light '}`}>
+        <h2 className="text-xl font-bold text-light">{article.title}</h2>
+        <ArticleContent content={article.ck} />
+      </div>
+    );
+  });
 }
 
 export default function Home() {
