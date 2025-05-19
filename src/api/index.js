@@ -2,6 +2,20 @@
 
 import parse from 'html-react-parser';
 
+const getCover = (data) => {
+  if (data.Cover && data.Cover.formats) {
+    const { large: image } = data.Cover.formats;
+    if (image) {
+      return {
+        src: image.url,
+        width: image.width,
+        height: image.height,
+      };
+    }
+  }
+  return null;
+}
+
 const getNodeContents = (data) => {
   const { props: { children } } = data;
   let contents = [];
@@ -51,11 +65,12 @@ export async function fetchAll() {
     .catch((error) => console.error(error));
 
   
+  
   return strapi.data.map((item) => ({
     slug: item.slug,
     title: item.Title,
     description: item.Description,
-    content: item.Content,
+    cover: getCover(item),
     ck: getDocumentNodes(item.Ckcontent),
     categories: item.categories,
   }));

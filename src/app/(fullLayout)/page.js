@@ -1,5 +1,6 @@
 import { fetchAll } from "@/api";
 import ArticleContent from "@/components/ArticleContent";
+import ArticleImage from "@/components/ArticleImage";
 
 async function Movies() {
   const data = await fetchAll();  
@@ -15,6 +16,7 @@ async function Movies() {
     return (
       <div key={article.slug} className={`${index === data.length - 1 ? 'pt-4' : ' py-4 border-b border-light '}`}>
         <h2 className="text-xl font-bold text-light">{article.title}</h2>
+        <ArticleImage article={article} />
         <ArticleContent content={article.ck} />
       </div>
     );
