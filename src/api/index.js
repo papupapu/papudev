@@ -69,17 +69,24 @@ export async function fetchAll() {
       'Authorization': `bearer ${strapi_key}`,
     },
   };
-  
-  const strapi = await fetch(`${strapi_url}/api/articles?populate=*&sort=createdAt:desc`, options)
-    .then((res) => res.json())
-    .catch((error) => console.error(error));
-  
-  return strapi.data.map((item) => ({
-    slug: item.slug,
-    title: item.Title,
-    description: item.Description,
-    cover: getCover(item),
-    ck: getDocumentNodes(item.Ckcontent),
-    categories: item.categories,
-  }));
+
+  let strapi = [];
+  try {
+    strapi = await fetch(`${strapi_url}/api/articles?populate=*&sort=createdAt:desc`, options)
+      .then((res) => res.json());
+  } catch (error) {
+    return  { error: JSON.stringify(error), data: [] };
+  }
+
+  return {
+    error: false,
+    data: strapi.data.map((item) => ({
+      slug: item.slug,
+      title: item.Title,
+      description: item.Description,
+      cover: getCover(item),
+      ck: getDocumentNodes(item.Ckcontent),
+      categories: item.categories,
+    })),
+  };
 }
