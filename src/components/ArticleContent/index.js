@@ -6,9 +6,9 @@ const className = {
   h6: 'text-base font-bold mb-5',
   ul: 'list-disc list-inside mb-5',
   ol: 'list-decimal list-inside mb-5',
-  blockquote: 'border-l-4 border-gray-500 pl-4 italic mb-5',
+  blockquote: 'border-l-4 border-dark pl-4 italic mb-5',
   code: 'block p-4 mb-5 bg-dark/30 rounded-md text-lessdark',
-  a: 'text-light hover:text-lightest transition-colors duration-200',
+  a: 'text-lightest hover:text-light transition-colors duration-200',
 };
 
 const printContent = (obj, index) => {

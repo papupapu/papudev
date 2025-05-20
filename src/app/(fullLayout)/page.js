@@ -34,7 +34,7 @@ async function Movies() {
       <div key={article.slug} className={`grow pt-4 justify-center lg:grid lg:grid-cols-5 lg:gap-6`}>
         <div className="hidden lg:block">allora vediamo un po&apos; cosa ci sta qui</div>
         <div className="lg:col-span-3">
-          <h1 className="mb-3 text-5xl font-bold text-light">{article.title}</h1>
+          <h1 className="mb-3 text-5xl font-bold text-lightest">{article.title}</h1>
           <h2 className="mb-5 text-3xl font-bold">{article.description}</h2>
           <ArticleImage article={article} />        
           <ArticleContent content={article.ck} />

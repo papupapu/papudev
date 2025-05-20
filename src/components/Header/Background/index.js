@@ -20,6 +20,6 @@ export default function Background() {
   }, []);
 
   return (
-    <div className={`absolute top-0 left-0 w-full h-full bg-darker transition-opacity ${isTransparent ? 'opacity-0' : 'opacity-70'} -z-1`} />
+    <div className={`absolute top-0 left-0 w-full h-full bg-darker transition-opacity duration-450 ${isTransparent ? 'opacity-0' : 'opacity-70'} -z-1`} />
   );
 }
