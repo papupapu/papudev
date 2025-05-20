@@ -4,14 +4,24 @@ import parse from 'html-react-parser';
 
 const getCover = (data) => {
   if (data.Cover && data.Cover.formats) {
-    const { large: image } = data.Cover.formats;
-    if (image) {
-      return {
-        src: image.url,
-        width: image.width,
-        height: image.height,
-      };
-    }
+    const { large, medium, small } = data.Cover.formats;
+    return {
+      large: {
+        src: large.url.replace(/upload/g, 'upload/f_auto/q_auto:eco'),
+        width: large.width,
+        height: large.height,
+      },
+      medium: {
+        src: medium.url.replace(/upload/g, 'upload/f_auto/q_auto:eco'),
+        width: medium.width,
+        height: medium.height,
+      },
+      small: {
+        src: small.url.replace(/upload/g, 'upload/f_auto/q_auto:eco'),
+        width: small.width,
+        height: small.height,
+      },
+    };
   }
   return null;
 }
@@ -63,8 +73,6 @@ export async function fetchAll() {
   const strapi = await fetch(`${strapi_url}/api/articles?populate=*&sort=createdAt:desc`, options)
     .then((res) => res.json())
     .catch((error) => console.error(error));
-
-  
   
   return strapi.data.map((item) => ({
     slug: item.slug,

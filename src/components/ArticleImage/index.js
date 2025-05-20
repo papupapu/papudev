@@ -2,14 +2,18 @@ import Image from "next/image";
 
 export default function ArticleImage({ article }) {
   if (!article.cover) return null;
-
-  const { cover: { src, width, height } } = article;
+  const { cover: { large, medium, small } } = article;
   return (
-    <Image
-      src={src}
-      width={width}
-      height={height}
-      alt={article.title}
-    />
+    <picture>
+      <source media="(max-width: 500px)" srcSet={small.src} />
+      <source media="(max-width: 750px)" srcSet={medium.src} />
+      <img
+        src={large.src}
+        width={large.width}
+        height={large.height}
+        alt={article.title}
+      />
+    </picture>
   );
+  return null;
 }

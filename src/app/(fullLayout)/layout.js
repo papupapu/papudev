@@ -6,7 +6,7 @@ export default function FullLayout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <Wrapper classname="grow pt-16 lg:pt-20">
+      <Wrapper classname="grow flex justify-center pt-16 lg:pt-20">
         {children}
       </Wrapper>
       <Footer />
