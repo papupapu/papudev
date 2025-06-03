@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import Hamburger from "@/components/Icons/hamburger";
 
-export default function MenuButton() {
+export default function MenuButton({ className }) {
   const handleClick = () => console.log("Menu button clicked");
 
   return (
@@ -11,7 +11,7 @@ export default function MenuButton() {
       type="button"
       ariaLabel="Site menu"
       action={handleClick}
-      className="w-10 h-10"
+      className={`w-10 h-10${className ? ` ${className}` : ''}`}
     >
       <Hamburger />
     </Button>

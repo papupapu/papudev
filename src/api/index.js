@@ -1,6 +1,20 @@
 'use server';
 
+import qs from 'qs';
 import parse from 'html-react-parser';
+
+const formatDate = (date) => {
+  if (!date) {
+    return null;
+  }
+  const ts = Date.parse(date);
+  const d = new Date(ts);
+  return d.toLocaleDateString('it-IT', {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  });
+};
 
 const getCover = (data) => {
   if (data.Cover && data.Cover.formats) {
@@ -88,5 +102,71 @@ export async function fetchAll() {
       ck: getDocumentNodes(item.Ckcontent),
       categories: item.categories,
     })),
+  };
+}
+
+export async function fetchOne({ slug }) {
+  const strapi_key = process.env.STRAPI_API_TOKEN;
+  const strapi_url = process.env.STRAPI_API_HOST;
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${strapi_key}`,
+    },
+  };
+
+  let strapi = {};
+
+  try {
+    const query = qs.stringify({
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+      populate: '*',
+    }, { encodeValuesOnly: true });
+
+    strapi = await fetch(`${strapi_url}/api/articles?${query}`, options)
+      .then((res) => res.json());
+  } catch (error) {
+    return  {
+      error: JSON.stringify(error),
+      data: strapi,
+    };
+  }
+
+  if (!strapi.data.length) {
+    return  {
+      error: 'No data found',
+      data: strapi,
+    };
+  }
+
+  const [article] = strapi.data;
+
+  return {
+    error: false,
+    data: {
+      slug: article.slug,
+      title: article.Title,
+      publishDate: formatDate(article.createdAt),
+      lastUpdate: formatDate(article.updatedAt),
+      description: article.Description,
+      cover: getCover(article),
+      ck: getDocumentNodes(article.Ckcontent),
+      categories: {
+        main: {
+          name: article.MainCategory.Name,
+          slug: article.MainCategory.Slug,
+        },
+        additional: [
+          ...article.AdditionalCategories.map((cat) => ({
+            name: cat.Name,
+            slug: cat.Slug,
+          })),
+        ],
+      },
+    },
   };
 }

@@ -64,6 +64,6 @@
 
 body {
   background: var(--darkest);
-  color: var(--dark);
+  color: var(--lessdark);
   font-family: var(--font-opensans), Arial, Helvetica, sans-serif;
 }
