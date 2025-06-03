@@ -1,8 +1,8 @@
 import { fetchAll } from "@/api";
-import ArticleContent from "@/components/ArticleContent";
-import ArticleImage from "@/components/ArticleImage";
+import Content from "@/components/Article/Content";
+import Cover from "@/components/Article/Cover";
 
-async function Movies() {
+async function Movies({  }) {
   const apires = await fetchAll();  
   
   if (!apires || apires.error) {
@@ -42,8 +42,8 @@ async function Movies() {
         </div>        
         <div className="lg:grid lg:grid-cols-5 lg:gap-6">
           <div className="lg:col-span-3">
-            <ArticleImage article={article} />        
-            <ArticleContent content={article.ck} />
+            <Cover article={article} />        
+            <Content content={article.ck} />
           </div>
           <div className="lg:col-start-1">allora vediamo un po&apos; cosa ci sta qui</div>
         </div>
@@ -52,6 +52,7 @@ async function Movies() {
   });
 }
 
-export default function Home() {
+export default async function CategoryPage({ params }) {
+  const { category } = await params;
   return <Movies />;
 }

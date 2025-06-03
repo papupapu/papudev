@@ -4,11 +4,14 @@ import qs from 'qs';
 import parse from 'html-react-parser';
 
 const formatDate = (date) => {
+  if (!date) {
+    return null;
+  }
   const ts = Date.parse(date);
   const d = new Date(ts);
   return d.toLocaleDateString('it-IT', {
     day: 'numeric',
-    month: 'long',
+    month: 'numeric',
     year: 'numeric',
   });
 };
@@ -124,8 +127,6 @@ export async function fetchOne({ slug }) {
       populate: '*',
     }, { encodeValuesOnly: true });
 
-    console.log('query', query);
-    
     strapi = await fetch(`${strapi_url}/api/articles?${query}`, options)
       .then((res) => res.json());
   } catch (error) {

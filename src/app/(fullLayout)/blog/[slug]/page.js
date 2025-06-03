@@ -1,6 +1,8 @@
 import { fetchOne } from "@/api";
-import ArticleContent from "@/components/ArticleContent";
-import ArticleImage from "@/components/ArticleImage";
+
+import Content from "@/components/Article/Content";
+import Cover from "@/components/Article/Cover";
+import Infos from "@/components/Article/Infos";
 
 async function Article({ slug }) {
   const apires = await fetchOne({ slug });  
@@ -25,22 +27,20 @@ async function Article({ slug }) {
     );
   }
 
-  console.log(data)
-
   return (
-    <div key={data.slug} className={`grow pt-4 justify-center lg:grid lg:auto-rows-auto`}>
+    <div key={data.slug} className={`grow pt-4 sm:pb-18 justify-center lg:grid lg:pb-0 lg:auto-rows-auto`}>
       <div className="lg:grid lg:grid-cols-5 lg:gap-6">
         <div className="lg:col-span-3 lg:col-start-2">
           <h1 className="mb-3 text-5xl font-bold text-lightest">{data.title}</h1>
           <h2 className="mb-5 text-3xl font-bold">{data.description}</h2>
         </div>
       </div>
-      <div className="lg:grid lg:grid-cols-5 lg:gap-6">
-        <div>allora vediamo un po&apos; cosa ci sta qui</div>
-        <div className="lg:col-span-3">
-          <ArticleImage article={data} />
-          <ArticleContent content={data.ck} />
+      <div className="flex flex-col lg:grid lg:grid-cols-5 lg:gap-6">
+        <div className="order-1 lg:order-2 lg:col-span-3">
+          <Cover article={data} />
+          <Content content={data.ck} />          
         </div>
+        <Infos article={data} className="order-2 lg:order-1" />
       </div>
     </div>
   );
