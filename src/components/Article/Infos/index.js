@@ -1,5 +1,7 @@
 import TagLink from '../../TagLink';
 
+import SummaryButton from './SummaryButton';
+
 export default function ArticleSidebar({ article, className }) {
   const {
     lastUpdate,
@@ -14,28 +16,35 @@ export default function ArticleSidebar({ article, className }) {
   const mobileClassName = 'border-t items-center border-darker';
   const desktopClassName = 'lg:border-r lg:block lg:border-t-0';
 
+  const toggleSummary = () => {};
+
   return (
     <div className={`${mobileClassName} ${desktopClassName} ${className}`}>
       <div className="pt-4 flex justify-between lg:block lg:pt-0">
         <p>
-          <span className="text-sm lg:block lg:pb-1">Author:</span> Giancarlo Gerbaz
+          <span className="text-sm block pb-1">Author:</span> Giancarlo Gerbaz
         </p>
         <p className="lg:pt-3">
-          <span className="text-sm lg:block lg:pb-1">Publish date:</span> {lastUpdate || publishDate}
+          <span className="text-sm block pb-1">Publish date:</span> {lastUpdate || publishDate}
         </p>
       </div>
-      <div className="flex pt-1 lg:block lg:pt-1 lg:pb-5">
+      <div className="pt-1 lg:pb-5">
         <p className="mt-2 mr-2 py-1 text-sm">Topic{validAdditional.length ? 's' : ''}:</p>
-        <ul className="flex mt-2 gap-2">
-          <li><TagLink tag={main} /></li>        
+        <ul className="flex flex-wrap mt-2 gap-2">
+          <li><TagLink tag={main} /></li>
+          <li><TagLink tag={main} /></li>
+          <li><TagLink tag={main} /></li>
+          <li><TagLink tag={main} /></li>
+          <li><TagLink tag={main} /></li>
           {validAdditional.map((cat => (
             <li key={cat.slug}><TagLink tag={cat} /></li>
           )))}
         </ul>
       </div>
-      <div className="hidden lg:block">
-        <p className="lg:text-sm">Summary:</p>
-        <ul className="lg:pt-1">
+      <div className="fixed bottom-4 right-4 lg:static lg:pt-1">
+        <SummaryButton className="relative lg:hidden z-2" />        
+        <p className="hidden lg:block text-sm">Summary:</p>
+        <ul className="absolute bottom-5 right-5 bg-dark/90 w-2xs p-4 z-1 rounded-3xl lg:static lg:block lg:pt-1">
           <li>Chapter 1</li>
           <li>Chapter 2</li>
           <li>Chapter 3</li>
