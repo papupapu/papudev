@@ -2,7 +2,7 @@ import Wrapper from "@/components/Wrapper";
 
 export default function Footer() {
   return (
-    <footer className="mt-8 border-t-2 border-t-light">
+    <footer id="footer" className="mt-8 border-t-2 border-t-light">
       <Wrapper classname="flex flex-col py-8 md:h-80">
         <div className="md:grid md:grid-cols-[67%_33%] pb-8 grow justify-between">
           <div className="md:pr-8 pb-8 md:pb-0 grid grid-cols-2 md:grid-cols-3 gap-4 text-lessdark">

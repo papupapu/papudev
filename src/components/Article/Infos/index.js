@@ -1,22 +1,16 @@
-import TagLink from '../../TagLink';
-
-import SummaryButton from './SummaryButton';
+import Topics from './Topics';
+import Summary from './Summary';
 
 export default function ArticleSidebar({ article, className }) {
   const {
     lastUpdate,
     publishDate,
-    categories: {
-      main,
-      additional,
-    },
+    categories,
+    summary,
   } = article;
-  const validAdditional = additional; // (additional || []).filter((cat) => cat.slug !== 'homepage' && cat.slug !== main.slug);
 
   const mobileClassName = 'border-t items-center border-darker';
   const desktopClassName = 'lg:border-r lg:block lg:border-t-0';
-
-  const toggleSummary = () => {};
 
   return (
     <div className={`${mobileClassName} ${desktopClassName} ${className}`}>
@@ -28,30 +22,8 @@ export default function ArticleSidebar({ article, className }) {
           <span className="text-sm block pb-1">Publish date:</span> {lastUpdate || publishDate}
         </p>
       </div>
-      <div className="pt-1 lg:pb-5">
-        <p className="mt-2 mr-2 py-1 text-sm">Topic{validAdditional.length ? 's' : ''}:</p>
-        <ul className="flex flex-wrap mt-2 gap-2">
-          <li><TagLink tag={main} /></li>
-          <li><TagLink tag={main} /></li>
-          <li><TagLink tag={main} /></li>
-          <li><TagLink tag={main} /></li>
-          <li><TagLink tag={main} /></li>
-          {validAdditional.map((cat => (
-            <li key={cat.slug}><TagLink tag={cat} /></li>
-          )))}
-        </ul>
-      </div>
-      <div className="fixed bottom-4 right-4 lg:static lg:pt-1">
-        <SummaryButton className="relative lg:hidden z-2" />        
-        <p className="hidden lg:block text-sm">Summary:</p>
-        <ul className="absolute bottom-5 right-5 bg-dark/90 w-2xs p-4 z-1 rounded-3xl lg:static lg:block lg:pt-1">
-          <li>Chapter 1</li>
-          <li>Chapter 2</li>
-          <li>Chapter 3</li>
-          <li>Chapter 4</li>
-          <li>Chapter 5</li>
-        </ul>
-      </div>
+      <Topics categories={categories} />
+      {summary ? <Summary summary={summary} /> : null}
     </div>
   );
 }
