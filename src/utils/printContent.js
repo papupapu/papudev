@@ -24,6 +24,10 @@ export default function printContent(obj, index, printJustContentForThisTag = nu
     return printContent(item, key);
   });
 
+  if (type === 'img') {
+    return <Tag key={`${type}_${index}`} {...obj.attributes} className={className[type] || null} />;
+  }
+
   return printJustContentForThisTag && type === printJustContentForThisTag ? content : (
     <Tag key={`${type}_${index}`} className={className[type] || null} {...obj.attributes}>
       {content}

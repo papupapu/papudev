@@ -56,9 +56,19 @@ const getNodeContents = (data) => {
       return ({ type: 'text', value: child });
     });
   } else if (children.type) {
-    contents = children.type === 'a' && !Array.isArray(children)
-      ? [{ type: children.type, value: getNodeContents(children), attributes: { href: children.props.href, rel: children.props.rel, target: children.props.target, name: children.props.name } }]
-      : [{ type: children.type, value: getNodeContents(children) }];
+    switch (children.type) {
+      case 'a':
+        contents = [{ type: children.type, value: getNodeContents(children), attributes: { href: children.props.href, rel: children.props.rel, target: children.props.target, name: children.props.name } }];
+        break;
+      case 'img':
+        contents = [{ type: children.type, value: [], attributes: { ...children.props } }];
+        break;
+      default:
+        contents = [{ type: children.type, value: getNodeContents(children) }];
+    }
+    // contents = children.type === 'a'// && !Array.isArray(children)
+    //   ? [{ type: children.type, value: getNodeContents(children), attributes: { href: children.props.href, rel: children.props.rel, target: children.props.target, name: children.props.name } }]
+    //   : [{ type: children.type, value: getNodeContents(children) }];
   } else if (typeof children === 'string') {
     contents = [{ type: 'text', value: children }];
   }
@@ -72,7 +82,7 @@ const getDocumentNodes = (data) => {
   }
   return parsedHtmlString.map((node) => {
     const value = getNodeContents(node);
-    if (node.type === 'pre') {
+    if (node.type === 'pre' || node.type === 'div') {
       return value[0];
     }
     if (node.type === 'blockquote') {
