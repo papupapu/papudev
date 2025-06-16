@@ -42,19 +42,22 @@ const getCover = (data) => {
 
 const getNodeContents = (data) => {
   const { props: { children } } = data;
+  if (!children) {
+    return [{ type: 'text', value: '' }];;
+  }
   let contents = [];
   if (Array.isArray(children)) {
     contents = children.map((child) => {
       if (child.type) {        
         return child.type === 'a'
-          ? { type: child.type, value: getNodeContents(child), attributes: { href: child.props.href, rel: child.props.rel, target: child.props.target } }
+          ? { type: child.type, value: getNodeContents(child), attributes: { href: child.props.href, rel: child.props.rel, target: child.props.target, name: child.props.name } }
           : { type: child.type, value: getNodeContents(child) };
       }
       return ({ type: 'text', value: child });
     });
   } else if (children.type) {
     contents = children.type === 'a' && !Array.isArray(children)
-      ? [{ type: children.type, value: getNodeContents(children), attributes: { href: children.props.href, rel: children.props.rel, target: children.props.target } }]
+      ? [{ type: children.type, value: getNodeContents(children), attributes: { href: children.props.href, rel: children.props.rel, target: children.props.target, name: children.props.name } }]
       : [{ type: children.type, value: getNodeContents(children) }];
   } else if (typeof children === 'string') {
     contents = [{ type: 'text', value: children }];
