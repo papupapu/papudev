@@ -193,7 +193,7 @@ export async function fetchByCategory({ category }) {
       description: item.Description,
       date: formatDate(item.updatedAt),
       cover: getCover(item),
-      categories: getCategories(item, category),
+      categories: getCategories(item),
     })),
   };
 }

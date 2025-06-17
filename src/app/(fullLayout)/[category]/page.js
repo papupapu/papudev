@@ -4,6 +4,20 @@ import ArticleImage from "@/components/Article/Cover";
 
 import { tagClassNames } from "@/utils/printContent";
 
+export async function generateMetadata({ params }, parent) {
+  const { category } = await params;
+
+  const apires = await fetchByCategory({ category });
+  
+  const { data } = apires;
+
+  const [first] = data;
+
+  return {
+    title: first.categories?.main?.name || 'Category',
+  }
+}
+
 export default async function CategoryPage({ params }) {
   const { category } = await params;
   const apires = await fetchByCategory({ category });
@@ -31,6 +45,8 @@ export default async function CategoryPage({ params }) {
   }
 
   const [first, ...rest] = data;
+
+  console.log(first)
 
   return (
     <div className="w-full pt-2 lg:pt4">

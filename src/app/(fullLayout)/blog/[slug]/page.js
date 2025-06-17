@@ -4,6 +4,18 @@ import Content from "@/components/Article/Content";
 import Cover from "@/components/Article/Cover";
 import Infos from "@/components/Article/Infos";
 
+export async function generateMetadata({ params }, parent) {
+  const { slug } = await params;
+
+  const apires = await fetchOne({ slug });  
+ 
+  const { data } = apires;
+
+  return {
+    title: data.title,
+  }
+}
+
 export default async function PostPage({ params }) {
   const { slug } = await params;
 
