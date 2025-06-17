@@ -92,18 +92,28 @@ const getDocumentNodes = (data) => {
   });
 }
 
-const getCategories = (article) => {
-  const main = article.MainCategory && article.MainCategory.length
+const getCategories = (article, toExclude = null) => {
+  const categoriesThatShouldBeExcluded = ['homepage'];
+  if (toExclude) {
+    const addToDefault = !Array.isArray(toExclude) ? [toExclude] : toExclude;
+    categoriesThatShouldBeExcluded.push(...addToDefault);
+  }
+  const main = article.MainCategory && article.MainCategory.length && !categoriesThatShouldBeExcluded.includes(article.MainCategory[0].Slug)
     ? {
       name: article.MainCategory[0].Name,
       slug: article.MainCategory[0].Slug,
     } : null;
 
   const additional = article.AdditionalCategories && article.AdditionalCategories.length
-    ? article.AdditionalCategories.map((cat) => ({
-      name: cat.Name,
-      slug: cat.Slug,
-    })) : [];
+    ? article.AdditionalCategories.map((cat) => {
+      if (!categoriesThatShouldBeExcluded.includes(cat.Slug)) {
+        return {
+          name: cat.Name,
+          slug: cat.Slug,
+        };
+      }
+      return null;
+    }).filter(Boolean) : [];
 
   return main?.name ? {
     main,
@@ -138,6 +148,52 @@ export async function fetchAll() {
       cover: getCover(item),
       ck: getDocumentNodes(item.Ckcontent),
       categories: item.categories,
+    })),
+  };
+}
+
+export async function fetchByCategory({ category }) {
+  const strapi_key = process.env.STRAPI_API_TOKEN;
+  const strapi_url = process.env.STRAPI_API_HOST;
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `bearer ${strapi_key}`,
+    },
+  };
+
+  let strapi = [];
+
+  try {
+    const query = qs.stringify({
+      filters: {
+        MainCategory: {
+          Slug: {
+            $eq: category,
+          },
+        },
+      },
+      populate: '*',
+    }, { encodeValuesOnly: true });
+
+    strapi = await fetch(`${strapi_url}/api/articles?${query}`, options)
+      .then((res) => res.json());
+  } catch (error) {
+    return  {
+      error: JSON.stringify(error),
+      data: strapi,
+    };
+  }
+
+  return {
+    error: false,
+    data: strapi.data.map((item) => ({
+      slug: item.slug,
+      title: item.Title,
+      description: item.Description,
+      date: formatDate(item.updatedAt),
+      cover: getCover(item),
+      categories: getCategories(item, category),
     })),
   };
 }

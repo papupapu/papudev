@@ -39,7 +39,7 @@ export default function Modal({ content, style, closeModal }) {
   return (
     <ReactPortal
       wrapperId="react-portal-modal"
-      className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center"
+      className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center z-100"
     >
       <ModalContent
         isUp={isUp}

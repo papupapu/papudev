@@ -4,7 +4,9 @@ import Content from "@/components/Article/Content";
 import Cover from "@/components/Article/Cover";
 import Infos from "@/components/Article/Infos";
 
-async function Article({ slug }) {
+export default async function PostPage({ params }) {
+  const { slug } = await params;
+
   const apires = await fetchOne({ slug });  
   
   if (!apires || apires.error) {
@@ -37,16 +39,11 @@ async function Article({ slug }) {
       </div>
       <div className="flex flex-col lg:grid lg:grid-cols-5 lg:gap-6">
         <div className="order-1 lg:order-2 lg:col-span-3">
-          <Cover article={data} />
+          <Cover article={data} className="mb-5" />
           <Content content={data.ck} />          
         </div>
         <Infos article={data} className="order-2 lg:order-1" />
       </div>
     </div>
   );
-}
-
-export default async function PostPage({ params }) {
-  const { slug } = await params;
-  return <Article slug={slug} />;
 }

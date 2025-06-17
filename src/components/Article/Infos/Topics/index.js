@@ -6,7 +6,7 @@ export default function Topics({ categories  }) {
   }
 
   const { main, additional = [] } = categories;
-  const validAdditional = additional; // (additional || []).filter((cat) => cat.slug !== 'homepage' && cat.slug !== main.slug);
+  const validAdditional = (additional || []).filter((cat) => cat.slug !== main.slug);
   return (
     <div className="pt-1 lg:pb-5">
       <p className="mt-2 mr-2 py-1 text-sm">Topic{validAdditional.length ? 's' : ''}:</p>

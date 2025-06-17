@@ -1,4 +1,4 @@
-const className = {
+export const tagClassNames = {
   p: 'mb-5',
   h3: 'text-2xl font-bold mb-5',
   h4: 'text-xl font-bold mb-5',
@@ -25,11 +25,11 @@ export default function printContent(obj, index, printJustContentForThisTag = nu
   });
 
   if (type === 'img') {
-    return <Tag key={`${type}_${index}`} {...obj.attributes} className={className[type] || null} />;
+    return <Tag key={`${type}_${index}`} {...obj.attributes} className={tagClassNames[type] || null} />;
   }
 
   return printJustContentForThisTag && type === printJustContentForThisTag ? content : (
-    <Tag key={`${type}_${index}`} className={className[type] || null} {...obj.attributes}>
+    <Tag key={`${type}_${index}`} className={tagClassNames[type] || null} {...obj.attributes}>
       {content}
     </Tag>
   );
