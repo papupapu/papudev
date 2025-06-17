@@ -1,12 +1,14 @@
-import { fetchAll } from "@/api";
-import Content from "@/components/Article/Content";
-import Cover from "@/components/Article/Cover";
+import { fetchByCategory } from "@/api";
 
-async function Movies({  }) {
-  const apires = await fetchAll();  
-  
+import ArticleImage from "@/components/Article/Cover";
+
+import { tagClassNames } from "@/utils/printContent";
+
+export default async function CategoryPage({ params }) {
+  const { category } = await params;
+  const apires = await fetchByCategory({ category });
+
   if (!apires || apires.error) {
-    console.log("Error fetching data:", apires.error);
     return (
       <div className="flex flex-col items-center justify-center h-full text-dark">
         <h1 className="text-2xl font-bold">We got an error!</h1>
@@ -20,39 +22,40 @@ async function Movies({  }) {
   if (!data || !data.length) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-dark">
-        <h1 className="text-2xl font-bold">No data available</h1>
+        <h1 className="text-2xl font-bold">
+          No articles available in this category
+        </h1>
         <p className="mt-4">Please try again later.</p>
       </div>
     );
   }
 
-  return (data || []).map((article, index) => {
-    if (!article) {
-      return null;
-    }
-    console.log(article)
+  const [first, ...rest] = data;
 
-    return (
-      <div key={article.slug} className={`grow pt-4 justify-center lg:grid lg:auto-rows-auto`}>
-        <div className="lg:grid lg:grid-cols-5 lg:gap-6">
-          <div className="lg:col-span-3 lg:col-start-2">
-            <h1 className="mb-3 text-5xl font-bold text-lightest">{article.title}</h1>
-            <h2 className="mb-5 text-3xl font-bold">{article.description}</h2>
-          </div>
-        </div>        
-        <div className="lg:grid lg:grid-cols-5 lg:gap-6">
-          <div className="lg:col-span-3">
-            <Cover article={article} />        
-            <Content content={article.ck} />
-          </div>
-          <div className="lg:col-start-1">allora vediamo un po&apos; cosa ci sta qui</div>
+  return (
+    <div className="w-full pt-2 lg:pt4">
+      <div className="flex flex-col mt-2 mb-4 lg:mb-8 bg-darker md:flex-row rounded-xl overflow-hidden">
+        <ArticleImage article={first} className="w-full lg:max-w-2/5" />
+        <div className="pt-2 px-2 pb-4 lg:px-6 lg:pt-4 lg:max-w-3/5">
+          <h2 className="text-3xl font-bold">
+            <a href={`/blog/${first.slug}`} className={tagClassNames.a}>{first.title}</a>
+          </h2>
+          <p className="pt-2 text-lg line-clamp-5">{first.description}</p>
         </div>
-      </div>      
-    );
-  });
-}
-
-export default async function CategoryPage({ params }) {
-  const { category } = await params;
-  return <Movies />;
+      </div>
+      {rest.length > 0 ? (
+        <div className="flex flex-col gap-4 md:gap-8 mb-4 lg:mb-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+          {[...rest, ...rest, ...rest, ...rest].map((post) => (
+            <div key={post.slug} className="pb-4 w-full md:w-auto rounded-xl overflow-hidden border border-light">
+              <ArticleImage article={post} className="w-full" />
+              <h3 className="pt-3 px-3 text-xl font-bold">
+                <a href={`/blog/${post.slug}`} className={tagClassNames.a}>{post.title}</a>
+              </h3>
+              <p className="pt-1 px-3">{post.description}</p>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
 }
